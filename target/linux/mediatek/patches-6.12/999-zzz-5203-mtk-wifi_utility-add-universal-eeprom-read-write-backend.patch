@@ -13,8 +13,8 @@ Signed-off-by: chasey-dev <ellenyoung0912@gmail.com>
  .../wireless/wifi_utility/mt_wifi_eeprom.c    |  76 ++++
  .../wireless/wifi_utility/mt_wifi_eeprom.h    |  14 +
  .../net/wireless/wifi_utility/mt_wifi_mtd.c   |  81 +++--
- .../net/wireless/wifi_utility/mt_wifi_of.c    | 334 ++++++++++++++++++
- 5 files changed, 471 insertions(+), 36 deletions(-)
+ .../net/wireless/wifi_utility/mt_wifi_of.c    | 333 ++++++++++++++++++
+ 5 files changed, 470 insertions(+), 36 deletions(-)
  create mode 100644 drivers/net/wireless/wifi_utility/mt_wifi_eeprom.c
  create mode 100644 drivers/net/wireless/wifi_utility/mt_wifi_eeprom.h
  create mode 100644 drivers/net/wireless/wifi_utility/mt_wifi_of.c
@@ -265,7 +265,7 @@ Signed-off-by: chasey-dev <ellenyoung0912@gmail.com>
  
 --- /dev/null
 +++ b/drivers/net/wireless/wifi_utility/mt_wifi_of.c
-@@ -0,0 +1,334 @@
+@@ -0,0 +1,333 @@
 +#include <linux/err.h>
 +#include <linux/kernel.h>
 +#include <linux/nvmem-consumer.h>
@@ -594,7 +594,6 @@ Signed-off-by: chasey-dev <ellenyoung0912@gmail.com>
 +		ret = __mt_of_read_node_eeprom(np, from, len, buf);
 +		pr_info("%pOF: read of eeprom from=%lld len=%zu ret=%d\n",
 +			np, (long long)from, len, ret);
-+		of_node_put(np);
 +		return ret;
 +	}
 +
